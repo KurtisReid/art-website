@@ -59,17 +59,21 @@
     <div class="workName"><h3 id="artistName"></h3></div>
     <div class="workDesc"><p id="description"></p></div>
     </div>
+    <button data-operation="refresh">New Art</button>
 </body>
 <footer>
     <p id="dadJoke"></p>
 </footer>
 <script>
+    const refreshBtn = document.getElementById("refresh");
     let artTitle = document.getElementById("artTitle");
     let artImg = document.getElementById("artImg");
     let artistName = document.getElementById("artistName");
     let desc = document.getElementById("description");
     
     let isUndefined = false;
+
+
     async function getArt()
     {
         let random = Math.random();
@@ -86,20 +90,24 @@
             
             do
             {
+                console.log("do loop");
                 httpResponse = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + Math.floor(Math.random() * 830916));
                 body = await httpResponse.json(); // automatically parse body into javascript for you
                 console.log(body);
-                if (body.message != 'Not a valid object' && body.message != 'ObjectID not found')
+                console.log("messaga: " + body.message);
+                if (body.message != 'Not a valid object' && body.message != 'ObjectID not found' && body.message != 'undefined')
                 {
                     isUndefined = false;
+                    console.log("isundefined = false");
                 }
 
-            } while(isUndefined)
+                console.log("checking");
+            } while(isUndefined === true)
     
         
         
 
-
+            console.log("out of loop");
         artTitle.innerText = body.title;
         if (body.primaryImageSmall == "")
         {
@@ -127,13 +135,24 @@
     }
     getArt();
 
+    document.addEventListener("click", function(event) {
+        const element = event.target;
+        const operation = element.dataset.operation;
+
+        if (operation === "refresh")
+        {
+            getArt();
+        }
+        
+    });
+
     async function dadJoke()
     {
         const dadHttpResponse = await fetch(`https://icanhazdadjoke.com/`);
         const dadBod = dadHttpResponse; // automatically parse body into javascript for you
         console.log(dadBod);
     }
-    //dadJoke();
+    dadJoke();
     
 
 
