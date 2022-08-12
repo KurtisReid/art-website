@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Random art</title>
+    <h1>Random art of the day</h1>
+    <h2 id="artTitle"></h2>
+    <img id="artImg"></img>
+    <h3 id="artistName"></h3>
+    <p id="description"></p>
+
+</head>
+<body>
+    
+</body>
+<script>
+    let artTitle = document.getElementById("artTitle");
+    let artImg = document.getElementById("artImg");
+    let artistName = document.getElementById("artistName");
+    let desc = document.getElementById("description");
+    async function getArt()
+    {
+        const httpResponse = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/420`);
+        const body = await httpResponse.json(); // automatically parse body into javascript for you
+        console.log(body);
+
+    let random = Math.random();
+
+
+    artTitle.innerText = body.title;
+    artImg.src = body.primaryImage;
+    artImg.innerText = body.primaryImage;
+    artistName.innerText = body.artistDisplayName;
+    desc.innerText = `${artTitle.innerText} by ${artistName.innerText} is an`;
+    }
+    getArt();
+    
+
+
+</script>
+</html>
