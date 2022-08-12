@@ -14,10 +14,16 @@
         .title
         {
             font-size: larger;
+            margin-left: auto;
+            margin-right: auto;
+
         }
         .workTitle
         {
             align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+
         }
         .workImg
         {
@@ -54,27 +60,80 @@
     <div class="workDesc"><p id="description"></p></div>
     </div>
 </body>
+<footer>
+    <p id="dadJoke"></p>
+</footer>
 <script>
     let artTitle = document.getElementById("artTitle");
     let artImg = document.getElementById("artImg");
     let artistName = document.getElementById("artistName");
     let desc = document.getElementById("description");
+    
+    let isUndefined = false;
     async function getArt()
     {
-        const httpResponse = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/420`);
-        const body = await httpResponse.json(); // automatically parse body into javascript for you
+        let random = Math.random();
+
+        isUndefined = true;
+        let httpResponse = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + Math.floor(Math.random() * 830916));
+        let body = await httpResponse.json(); // automatically parse body into javascript for you
         console.log(body);
+        if (body.message != 'Not a valid object' && body.message != 'ObjectID not found')
+        {
+            console.log(body.message);
+            isUndefined = false;
+        }
+            
+            do
+            {
+                httpResponse = await fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/" + Math.floor(Math.random() * 830916));
+                body = await httpResponse.json(); // automatically parse body into javascript for you
+                console.log(body);
+                if (body.message != 'Not a valid object' && body.message != 'ObjectID not found')
+                {
+                    isUndefined = false;
+                }
 
-    let random = Math.random();
+            } while(isUndefined)
+    
+        
+        
 
 
-    artTitle.innerText = body.title;
-    artImg.src = body.primaryImageSmall;
-    artImg.innerText = body.primaryImage;
-    artistName.innerText = body.artistDisplayName;
-    desc.innerText = `${artTitle.innerText} by ${artistName.innerText} is an ${body.culture} ${body.medium} that was created in ${body.objectDate}.`;
+        artTitle.innerText = body.title;
+        if (body.primaryImageSmall == "")
+        {
+            console.log("no image");
+            
+        }
+        else
+        {
+            artImg.src = body.primaryImageSmall;
+        }
+        
+
+        //artImg.innerText = body.primaryImage;
+
+        if (body.artistDisplayName != "")
+        {
+            artistName.innerText = body.artistDisplayName;
+        }
+        else
+        {
+            artistName.innerText = "Unknown";
+        }
+        
+        desc.innerText = `${artTitle.innerText} by ${artistName.innerText} is an ${body.culture} ${body.medium} that was created in ${body.objectDate}.`;
     }
     getArt();
+
+    async function dadJoke()
+    {
+        const dadHttpResponse = await fetch(`https://icanhazdadjoke.com/`);
+        const dadBod = dadHttpResponse; // automatically parse body into javascript for you
+        console.log(dadBod);
+    }
+    //dadJoke();
     
 
 
