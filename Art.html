@@ -9,6 +9,7 @@
             margin-right: auto;
             width: 50%;
             height: 200px;
+            background-image: url('https://media.istockphoto.com/vectors/garland-with-light-bulbs-hanging-on-a-wooden-wall-vector-id1143502085?k=20&m=1143502085&s=612x612&w=0&h=LkrvRHceAeTTEWsLnHfYyOjJFCgyaOyfL276v1slCBw=')';
 
         }
         .title
@@ -16,6 +17,7 @@
             font-size: larger;
             margin-left: auto;
             margin-right: auto;
+            width: 100%;
 
         }
         .workTitle
@@ -23,6 +25,7 @@
             align-items: center;
             margin-left: auto;
             margin-right: auto;
+            width: 50%;
 
         }
         .workImg
@@ -30,98 +33,99 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
+            width: 100%;
+            height: 40%;
+        }
+        .para
+        {
+            align-items: center;
             width: 50%;
-            height: 50%;
+            justify-content: right;
         }
         .workName
         {
-
+            width: 50%;
         }
         .workDesc
         {
-            
+            width: 50%;
+        }
+        .newArt
+        {
+            align-items: center;
+            width: 50%;
+            justify-content: right;
         }
 
-        body{
-  background: #3399ff;
+        /* Cool infinite background scrolling animation.
+ * Twitter: @kootoopas
+ */
+
+/* Exo thin font from Google. */
+@import url(https://fonts.googleapis.com/css?family=Exo:100);
+
+/* Background data (Original source: https://subtlepatterns.com/grid-me/) */
+$bg-url: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC";
+$bg-width: 50px;
+$bg-height: 50px;
+
+/* Animations */
+@-webkit-keyframes bg-scrolling-reverse {
+  100% { background-position: $bg-width $bg-height; }
+}
+@-moz-keyframes    bg-scrolling-reverse {
+  100% { background-position: $bg-width $bg-height; }
+}
+@-o-keyframes      bg-scrolling-reverse {
+  100% { background-position: $bg-width $bg-height; }
+}
+@keyframes         bg-scrolling-reverse {
+  100% { background-position: $bg-width $bg-height; }
 }
 
-
-.circle{
-  position: absolute;
-  border-radius: 50%;
-  background: white;
-  animation: ripple 15s infinite;
-  box-shadow: 0px 0px 1px 0px #508fb9;
+@-webkit-keyframes bg-scrolling {
+  0% { background-position: $bg-width $bg-height; }
+}
+@-moz-keyframes    bg-scrolling {
+  0% { background-position: $bg-width $bg-height; }
+}
+@-o-keyframes      bg-scrolling {
+  0% { background-position: $bg-width $bg-height; }
+}
+@keyframes         bg-scrolling {
+  0% { background-position: $bg-width $bg-height; }
 }
 
-.small{
-  width: 200px;
-  height: 200px;
-  left: -100px;
-  bottom: -100px;
-}
-
-.medium{
-  width: 400px;
-  height: 400px;
-  left: -200px;
-  bottom: -200px;
-}
-
-.large{
-  width: 600px;
-  height: 600px;
-  left: -300px;
-  bottom: -300px;
-}
-
-.xlarge{
-  width: 800px;
-  height: 800px;
-  left: -400px;
-  bottom: -400px;
-}
-
-.xxlarge{
-  width: 1000px;
-  height: 1000px;
-  left: -500px;
-  bottom: -500px;
-}
-
-.shade1{
-  opacity: 0.2;
-}
-.shade2{
-  opacity: 0.5;
-}
-
-.shade3{
-  opacity: 0.7;
-}
-
-.shade4{
-  opacity: 0.8;
-}
-
-.shade5{
-  opacity: 0.9;
-}
-
-@keyframes ripple{
-  0%{
-    transform: scale(0.8);
-  }
+/* Main styles */
+body {
+  margin-top: 13.5rem;
   
-  50%{
-    transform: scale(1.2);
-  }
+  color: #999;
+  font: 400 16px/1.5 exo, ubuntu, "segoe ui", helvetica, arial, sans-serif;
+  text-align: center;
+  /* img size is 50x50 */
+  background: url($bg-url) repeat 0 0;
   
-  100%{
-    transform: scale(0.8);
+  -webkit-animation: bg-scrolling-reverse .92s infinite; /* Safari 4+ */
+  -moz-animation:    bg-scrolling-reverse .92s infinite; /* Fx 5+ */
+  -o-animation:      bg-scrolling-reverse .92s infinite; /* Opera 12+ */
+  animation:         bg-scrolling-reverse .92s infinite; /* IE 10+ */
+  -webkit-animation-timing-function: linear;
+  -moz-animation-timing-function:    linear;
+  -o-animation-timing-function:      linear;
+  animation-timing-function:         linear;
+  
+  &::before {
+    content: "INFINITY";
+
+    font-size: 8rem;
+    font-weight: 100;
+    font-style: normal;
   }
 }
+
+
+      
 
 
 
@@ -142,15 +146,16 @@
     <div class="title"><h1>Random art of the day</h1></div>
     
     <div class="workTitle"><h2 id="artTitle"></h2></div>
-    <div>
-    <div class="workImg"><img id="artImg"></img></div>
-    <br>
-    
-    <div class="workName"><h3 id="artistName"></h3></div>
-    <div class="workDesc"><p id="description"></p></div>
+    <div id="para">
+        <div class="workImg"><img id="artImg"></img></div>
+        <br>
+        
+        <div class="workName"><h3 id="artistName"></h3></div>
+        <div class="workDesc"><p id="description"></p></div>
+        <div class="newArt"><button data-operation="refresh">New Art</button></div>
     </div>
-    <button data-operation="refresh">New Art</button>
-    <button data-operation="dad">Press for dad joke</button>
+    
+    
 </body>
 <footer>
     <p id="dadJoke"></p>
