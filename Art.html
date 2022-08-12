@@ -1,16 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Random art</title>
-    <h1>Random art of the day</h1>
-    <h2 id="artTitle"></h2>
-    <img id="artImg"></img>
-    <h3 id="artistName"></h3>
-    <p id="description"></p>
+    <style>
+        body
+        {
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            height: 200px;
 
+        }
+        .title
+        {
+            font-size: larger;
+        }
+        .workTitle
+        {
+            align-items: center;
+        }
+        .workImg
+        {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            height: 50%;
+        }
+        .workName
+        {
+
+        }
+        .workDesc
+        {
+            
+        }
+
+
+    </style>
+<head>
+   
 </head>
 <body>
+    <title>Random art</title>
+    <div class="title"><h1>Random art of the day</h1></div>
     
+    <div class="workTitle"><h2 id="artTitle"></h2></div>
+    <div>
+    <div class="workImg"><img id="artImg"></img></div>
+    <br>
+    
+    <div class="workName"><h3 id="artistName"></h3></div>
+    <div class="workDesc"><p id="description"></p></div>
+    </div>
 </body>
 <script>
     let artTitle = document.getElementById("artTitle");
@@ -27,10 +69,10 @@
 
 
     artTitle.innerText = body.title;
-    artImg.src = body.primaryImage;
+    artImg.src = body.primaryImageSmall;
     artImg.innerText = body.primaryImage;
     artistName.innerText = body.artistDisplayName;
-    desc.innerText = `${artTitle.innerText} by ${artistName.innerText} is an`;
+    desc.innerText = `${artTitle.innerText} by ${artistName.innerText} is an ${body.culture} ${body.medium} that was created in ${body.objectDate}.`;
     }
     getArt();
     
